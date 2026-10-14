@@ -10,7 +10,7 @@ import {error404Page} from "./controllers/controller.js";
 //Setup
 const app = express();
 env.config();
-const port = process.env.SERVER_PORT;
+const port = process.env.PORT || process.env.SERVER_PORT || 3000;
 
 //Middleware Setup
 app.use(express.static("public"));
@@ -29,6 +29,6 @@ app.use(Routes);
 app.use("/", error404Page);
 
 // Server Listening
-app.listen(port, () => {
-  console.log(`Server running on port: ${parseInt(port)}`);
+app.listen(port, "0.0.0.0", () => {
+  console.log(`Server running on port: ${port}`);
 });

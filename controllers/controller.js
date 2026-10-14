@@ -737,7 +737,8 @@ export const getBlogView = async (req, res) => {
 }
 
 export const addLike = async(req, res) => {
-  const { post_id, user_id } = req.body;
+  const post_id = req.body.post_id;
+  const user_id = req.body.user_id;
   try {
     const result = await db.query("INSERT INTO likes (user_id, post_id, createdat) VALUES ($1, $2, $3) RETURNING *", [user_id, post_id, Date.now()]);
     if (result.rows.length > 0) {
@@ -750,7 +751,8 @@ export const addLike = async(req, res) => {
   }
 }
 export const removeLike = async (req, res) => {
-  const { post_id, user_id } = req.body;
+  const post_id = req.body.post_id;
+  const user_id = req.body.user_id;
   await db.query(
     'DELETE FROM likes WHERE post_id = $1 AND user_id = $2',
     [post_id, user_id]
@@ -836,7 +838,7 @@ passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: "http://localhost:3000/auth/google/home",
+      callbackURL: process.env.GOOGLE_CALLBACK_URL || "http://localhost:3000/auth/google/home",
       userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo",
     },
     async (accessToken, refreshToken, profile, cb) => {

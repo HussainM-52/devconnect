@@ -21,4 +21,3 @@ const sendMail = async () => {
 
   console.log('✅ Email sent:', info.messageId);
 }
-

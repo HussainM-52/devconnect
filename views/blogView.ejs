@@ -11,7 +11,7 @@
   </div>
   <% if (post.published === true) { %>
     <form class="like-form" action="/">
-      <input type="hidden" id="user-id" name="userId" value="<%= locals.profile && profile.id %>">
+      <input type="hidden" id="user-id" name="userId" value="<%= locals.profile ? profile.id : '' %>">
       <input id="post-id" type="hidden" name="postId" value="<%= post.id %>">
       <button type="submit" class="like">
   <% if (locals.liked) { %>
@@ -56,7 +56,7 @@
               <div class="comment">
             <div class="profile-box">
               <img class="avatar" src="<%= comment.commenter_pfp %>" alt="" />
-              <p class="username"><%= comment.commenter_username %></p>
+              <p class="username"><%= profile.username !==  comment.commenter_username ? comment.commenter_username : 'You' %></p>
             </div>
             <p class="comment-content"><%= comment.content %></p>
           </div>
@@ -79,7 +79,7 @@
     e.preventDefault();
     const icon = document.querySelector(".like i");
     const isLiked = icon.classList.contains("bi-hand-thumbs-up-fill");
-    const url = isLiked ? '/remove-like' : '/add-like';
+    const url = isLiked ? '/removeLike' : '/addLike';
     const dataToSend = { post_id: postId, user_id: userId };
     try {
       const response = await fetch(url, {

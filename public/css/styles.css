@@ -288,7 +288,7 @@ body {
   overflow: hidden;
 }
 .signup-container {
-  height: 65vh;
+  height: 67vh;
   max-height: 600px;
 }
 .login-container {
@@ -524,7 +524,7 @@ body {
   justify-content: space-around;
 }
 .create-profile-main .container {
-  height: 70vh;
+  height: 74vh;
 }
 .profileImageInputLabel {
   width: 30px;

@@ -39,8 +39,8 @@ router.post("/create-profile", Controllers.postCreateProfile);
 router.post("/edit-profile", Controllers.postEditProfile);
 router.post("/home/edit-post", Controllers.postEditPost);
 router.post("/home/create-post", Controllers.postHomePostCreate);
-router.post("/add-like", Controllers.addLike);
-router.post("/remove-like", Controllers.removeLike);
+router.post("/addLike", Controllers.addLike);
+router.post("/removeLike", Controllers.removeLike);
 router.post("/add-comment", Controllers.getAddComment);
 
 //File upload route
