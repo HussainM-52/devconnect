@@ -12,9 +12,18 @@ const config = process.env.DATABASE_URL
       host: process.env.DB_HOST,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_DATABASE,
-      port: process.env.DB_PORT,
+      port: Number(process.env.DB_PORT || 5432),
     };
 
-const db = new pg.Client(config);
+const db = new pg.Pool({
+  ...config,
+  max: 5,
+  idleTimeoutMillis: 30000,
+  connectionTimeoutMillis: 10000,
+});
+
+db.on("error", (err) => {
+  console.error("PostgreSQL connection error:", err.message);
+});
 
 export default db;
